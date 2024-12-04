@@ -4,19 +4,20 @@ services:
   mariadb:
     image: mariadb:10.11
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: restpilot
-      MYSQL_PASSWORD: restpilot
-      MYSQL_DATABASE: restpilot
-    ports:
-      - "3307:3306"
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=restpilot-auth-dev
     volumes:
       - mariadb_data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 5s
       timeout: 5s
       retries: 5
+    ports:
+      - "3307:3306"
 
   rabbitmq:
     image: rabbitmq:3.12-management
@@ -38,21 +39,34 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./auth-microservice:/app
-      - /app/node_modules
     ports:
       - "3001:3001"
     environment:
       - PORT=3001
       - NODE_ENV=development
-      - DB_HOST=mariadb
-      - DB_PORT=3306
-      - DB_USER=restpilot
-      - DB_PASSWORD=restpilot
-      - DB_NAME=restpilot
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-auth-dev
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
     depends_on:
       mariadb:
         condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    command: yarn start:dev
+
+  graphql:
+    build:
+      context: ./graphql-microservice
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./graphql-microservice:/app
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-graphql-dev
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
+    depends_on:
       rabbitmq:
         condition: service_healthy
     command: yarn start:dev
