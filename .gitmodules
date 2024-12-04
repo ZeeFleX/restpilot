@@ -4,3 +4,6 @@
 [submodule "graphql-microservice"]
 	path = graphql-microservice
 	url = git@github.com:ZeeFleX/restpilot-graphql.git
+[submodule "orders-microservice"]
+	path = orders-microservice
+	url = git@github.com:ZeeFleX/restpilot-orders.git

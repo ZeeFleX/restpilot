@@ -3,7 +3,8 @@
     "install": "submodules-install",
     "dev:up": "docker compose -f docker-compose-dev.yml up",
     "dev:down": "docker compose -f docker-compose-dev.yml down",
-    "auth:migrate": "docker compose -f docker-compose-dev.yml exec auth npx prisma migrate dev"
+    "auth:migrate": "docker compose -f docker-compose-dev.yml exec auth npx prisma migrate dev",
+    "orders:migrate": "docker compose -f docker-compose-dev.yml exec orders npx prisma migrate dev"
   },
   "devDependencies": {
     "submodules-install": "^1.1.0"
