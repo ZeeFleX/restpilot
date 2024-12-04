@@ -1,0 +1,6 @@
+[submodule "auth-microservice"]
+	path = auth-microservice
+	url = git@github.com:ZeeFleX/restpilot-auth.git
+[submodule "graphql-microservice"]
+	path = graphql-microservice
+	url = git@github.com:ZeeFleX/restpilot-graphql.git
