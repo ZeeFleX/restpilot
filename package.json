@@ -19,6 +19,21 @@
       "path": "graphql-microservice",
       "cmd": "yarn",
       "args": []
+    },
+    {
+      "path": "orders-microservice",
+      "cmd": "yarn",
+      "args": []
+    },
+    {
+      "path": "frontend-client",
+      "cmd": "yarn",
+      "args": []
+    },
+    {
+      "path": "frontend-manager",
+      "cmd": "yarn",
+      "args": []
     }
   ]
 }

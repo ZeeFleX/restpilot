@@ -7,3 +7,9 @@
 [submodule "orders-microservice"]
 	path = orders-microservice
 	url = git@github.com:ZeeFleX/restpilot-orders.git
+[submodule "frontend-client"]
+	path = frontend-client
+	url = git@github.com:ZeeFleX/restpilot-frontend-client.git
+[submodule "frontend-manager"]
+	path = frontend-manager
+	url = git@github.com:ZeeFleX/restpilot-frontend-manager.git

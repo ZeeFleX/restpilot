@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mariadb:
     image: mariadb:10.11
@@ -91,5 +89,38 @@ services:
         condition: service_healthy
     command: yarn start:dev
 
+  frontend:
+    build:
+      context: ./frontend-client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend-client:/app
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    user: "1000:1001"
+    command: npm run dev -- --host
+
+  manager:
+    build:
+      context: ./frontend-manager
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend-manager:/app
+    ports:
+      - "5174:5173"
+    environment:
+      - NODE_ENV=development
+    user: "1000:1001"
+    command: npm run dev -- --host
+
 volumes:
   mariadb_data:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.33.0.0/16
