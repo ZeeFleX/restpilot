@@ -31,26 +31,6 @@ services:
       timeout: 5s
       retries: 5
 
-  auth:
-    build:
-      context: ./auth-microservice
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./auth-microservice:/app
-    ports:
-      - "3001:3001"
-    environment:
-      - PORT=3001
-      - NODE_ENV=development
-      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-auth-dev
-      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
-    depends_on:
-      mariadb:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    command: yarn start:dev
-
   graphql:
     build:
       context: ./graphql-microservice
@@ -58,9 +38,9 @@ services:
     volumes:
       - ./graphql-microservice:/app
     ports:
-      - "3002:3002"
+      - "3001:3001"
     environment:
-      - PORT=3002
+      - PORT=3001
       - NODE_ENV=development
       - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-graphql-dev
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
@@ -69,18 +49,18 @@ services:
         condition: service_healthy
     command: yarn start:dev
 
-  orders:
+  auth:
     build:
-      context: ./orders-microservice
+      context: ./auth-microservice
       dockerfile: Dockerfile.dev
     volumes:
-      - ./orders-microservice:/app
+      - ./auth-microservice:/app
     ports:
-      - "3003:3003"
+      - "3002:3002"
     environment:
-      - PORT=3003
+      - PORT=3002
       - NODE_ENV=development
-      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-orders-dev
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-auth-dev
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
     depends_on:
       mariadb:
@@ -96,11 +76,31 @@ services:
     volumes:
       - ./menu-microservice:/app
     ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-menu-dev
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    command: yarn start:dev
+
+  orders:
+    build:
+      context: ./orders-microservice
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./orders-microservice:/app
+    ports:
       - "3004:3004"
     environment:
       - PORT=3004
       - NODE_ENV=development
-      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-menu-dev
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-orders-dev
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
     depends_on:
       mariadb:

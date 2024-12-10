@@ -13,9 +13,6 @@
 [submodule "frontend-manager"]
 	path = frontend-manager
 	url = git@github.com:ZeeFleX/restpilot-frontend-manager.git
-[submodule "shared-types"]
-	path = shared-types
-	url = git@github.com:ZeeFleX/restpilot-shared-types.git
 [submodule "menu-microservice"]
 	path = menu-microservice
 	url = git@github.com:ZeeFleX/restpilot-menu.git
