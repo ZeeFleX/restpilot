@@ -110,6 +110,26 @@ services:
         condition: service_healthy
     command: yarn start:dev
 
+  companies:
+    build:
+      context: ./companies-microservice
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./companies-microservice:/app
+    ports:
+      - "3005:3005"
+    environment:
+      - PORT=3005
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:root@mariadb:3306/restpilot-companies-dev
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    command: yarn start:dev
+
   frontend:
     build:
       context: ./frontend-client

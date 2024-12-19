@@ -6,6 +6,7 @@
     "auth:migrate": "docker compose -f docker-compose-dev.yml exec auth npx prisma migrate dev",
     "orders:migrate": "docker compose -f docker-compose-dev.yml exec orders npx prisma migrate dev",
     "menu:migrate": "docker compose -f docker-compose-dev.yml exec menu npx prisma migrate dev",
+    "companies:migrate": "docker compose -f docker-compose-dev.yml exec companies npx prisma migrate dev",
     "auth:seed": "docker compose -f docker-compose-dev.yml exec auth npm run db:seed"
   },
   "devDependencies": {
@@ -44,6 +45,11 @@
     },
     {
       "path": "frontend-admin",
+      "cmd": "yarn",
+      "args": []
+    },
+    {
+      "path": "companies-microservice",
       "cmd": "yarn",
       "args": []
     }

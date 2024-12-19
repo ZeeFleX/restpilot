@@ -19,3 +19,6 @@
 [submodule "frontend-admin"]
 	path = frontend-admin
 	url = git@github.com:ZeeFleX/restpilot-frontend-admin.git
+[submodule "companies-microservice"]
+	path = companies-microservice
+	url = git@github.com:ZeeFleX/restpilot-companies.git
