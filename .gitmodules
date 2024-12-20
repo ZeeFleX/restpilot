@@ -22,3 +22,6 @@
 [submodule "companies-microservice"]
 	path = companies-microservice
 	url = git@github.com:ZeeFleX/restpilot-companies.git
+[submodule "coordinator-microservice"]
+	path = coordinator-microservice
+	url = git@github.com:ZeeFleX/restpilot-coordinator.git

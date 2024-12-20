@@ -4,10 +4,11 @@
     "dev:up": "docker compose -f docker-compose-dev.yml up",
     "dev:down": "docker compose -f docker-compose-dev.yml down",
     "auth:migrate": "docker compose -f docker-compose-dev.yml exec auth npx prisma migrate dev",
+    "auth:seed": "docker compose -f docker-compose-dev.yml exec auth npm run db:seed",
     "orders:migrate": "docker compose -f docker-compose-dev.yml exec orders npx prisma migrate dev",
     "menu:migrate": "docker compose -f docker-compose-dev.yml exec menu npx prisma migrate dev",
-    "companies:migrate": "docker compose -f docker-compose-dev.yml exec companies npx prisma migrate dev",
-    "auth:seed": "docker compose -f docker-compose-dev.yml exec auth npm run db:seed"
+    "companies:migrate": "docker compose -f docker-compose-dev.yml exec companies npx prisma migrate dev"
+    
   },
   "devDependencies": {
     "submodules-install": "^1.1.0"
@@ -50,6 +51,11 @@
     },
     {
       "path": "companies-microservice",
+      "cmd": "yarn",
+      "args": []
+    },
+    {
+      "path": "coordinator-microservice",
       "cmd": "yarn",
       "args": []
     }

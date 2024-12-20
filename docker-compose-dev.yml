@@ -130,6 +130,23 @@ services:
         condition: service_healthy
     command: yarn start:dev
 
+  coordinator:
+    build:
+      context: ./coordinator-microservice
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./coordinator-microservice:/app
+    ports:
+      - "3006:3006"
+    environment:
+      - PORT=3006
+      - NODE_ENV=development
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    command: yarn start:dev
+
   frontend:
     build:
       context: ./frontend-client
