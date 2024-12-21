@@ -7,8 +7,11 @@
     "auth:seed": "docker compose -f docker-compose-dev.yml exec auth npm run db:seed",
     "orders:migrate": "docker compose -f docker-compose-dev.yml exec orders npx prisma migrate dev",
     "menu:migrate": "docker compose -f docker-compose-dev.yml exec menu npx prisma migrate dev",
-    "companies:migrate": "docker compose -f docker-compose-dev.yml exec companies npx prisma migrate dev"
-    
+    "companies:migrate": "docker compose -f docker-compose-dev.yml exec companies npx prisma migrate dev",
+    "auth:generate": "docker compose -f docker-compose-dev.yml exec auth npx prisma generate",
+    "orders:generate": "docker compose -f docker-compose-dev.yml exec orders npx prisma generate",
+    "menu:generate": "docker compose -f docker-compose-dev.yml exec menu npx prisma generate",
+    "companies:generate": "docker compose -f docker-compose-dev.yml exec companies npx prisma generate"
   },
   "devDependencies": {
     "submodules-install": "^1.1.0"
