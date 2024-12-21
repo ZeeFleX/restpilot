@@ -25,3 +25,6 @@
 [submodule "coordinator-microservice"]
 	path = coordinator-microservice
 	url = git@github.com:ZeeFleX/restpilot-coordinator.git
+[submodule "shared-types"]
+	path = shared-types
+	url = git@github.com:ZeeFleX/restpilot-shared-types.git
