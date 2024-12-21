@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Перейти в директорию shared-types и получить последние изменения
+# Перейти в директорию shared-functions и собрать проект
 cd shared-functions
-git pull origin main
+yarn install
+yarn build
 
 # Перейти обратно в корневую директорию
 cd ..
@@ -23,7 +24,7 @@ for service in "${services[@]}"; do
     echo "Updating $service..."
     cd $service
     
-    # Удалить node_modules/shared-types если существует
+    # Удалить node_modules/shared-functions если существует
     rm -rf node_modules/shared-functions
     
     # Переустановить зависимости

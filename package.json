@@ -58,6 +58,11 @@
       "path": "coordinator-microservice",
       "cmd": "yarn",
       "args": []
+    },
+    {
+      "path": "shared-functions",
+      "cmd": "yarn",
+      "args": []
     }
   ]
 }
