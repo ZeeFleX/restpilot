@@ -67,5 +67,8 @@
       "cmd": "yarn",
       "args": []
     }
-  ]
+  ],
+  "dependencies": {
+    "graphql": "^16.10.0"
+  }
 }
